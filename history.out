@@ -1,0 +1,105 @@
+    1  ping -c 4 8.8.8.8
+    2  ping -c 4 8.8.8.8 > ~/ping.out
+    3  cat ~/ping.out 
+    4  sudo dnf update
+    5  sudo dnf install nginx libcap-ng-utils -y
+    6  cd /tmp
+    7  dnf download tcpbump
+    8  dnf download tcpdump
+    9  sudo rpm -ivh tcpdump*.rpm
+   10  uname -m
+   11  ls -l /tmp/tcpdump*.rpm
+   12  sudo rpm -ivh tcpdump*.x86_64.rpm
+   13  cd ~
+   14  dnf history > ~/dnf.out
+   15  cat dnf.out
+   16  cd tmp
+   17  cd ~/tmp
+   18  ls
+   19  rm -f /tmp/tcpdump*.i686.rpm
+   20  lsblk
+   21  sudo fdisk /dev/sdb
+   22  lsblk /dev/sdb
+   23  sudo mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+   24  sudo blkid /dev/sdb1
+   25  sudo mkdir -p /mephi-web
+   26  echo 'LABEL=MEPHI_WEB /mephi-web ext4 defaults 0 0' | sudo tee -a /etc/fstab
+   27  tail -n 5 /etc/fstab
+   28  sudo mount -a
+   29  findmnt /mephi-web
+   30  df -h /mephi-web
+   31  sudo systemctl start nginx
+   32  sudo systemctl enable nginx
+   33  journalct -u nginx -b > ~/journalctl.out
+   34  journalctl -u nginx -b > ~/journalctl.out
+   35  cat ~/journalctl.out 
+   36  sudo groupadd -g 4444 curators
+   37  sudo useradd curator1
+   38  sudo useradd curator2
+   39  sudo usermod -aG curators curator1
+   40  sudo usermod -aG curators curator2
+   41  sudo groupadd developers
+   42  sudo useradd -u 5501 user1
+   43  sudo useradd -u 5502 user2
+   44  sudo useradd -u 5503 user3
+   45  sudo usermod -aG developers user1
+   46  sudo usermod -aG developers user2
+   47  sudo usermod -aG developers user3
+   48  sudo mkdir -p /data/mephi-2026
+   49  sudo chown root:developers /data/mephi-2026
+   50  sudo chmod 770 /data/mephi-2026
+   51  sudo chmod g+s /data/mephi-2026
+   52  sudo setfacl -m g:developers /data/mephi-2026
+   53  sudo setfacl -m g:developers:rwx /data/mephi-2026
+   54  sudo setfacl -d -m g:developers:rwx /data/mephi-2026
+   55  sudo setfacl -m g:curators:r-x /data/mephi-2026
+   56  sudo setfacl -d -m g:curators:r-x /data/mephi-2026
+   57  sudo setfacl -m o::--- /data/mephi-2026
+   58  sudo setfacl -d -m o::--- /data/mephi-2026
+   59  getfacl /data/mephi-2026
+   60  ls -ld /data/mephi-2026
+   61  which tcpdump
+   62  rpm -ql tcpdump
+   63  ls -l /usr/sbin/tcpdump
+   64  sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+   65  sudo getcap /usr/sbin/tcpdump
+   66  sudo -u user1 tcpdump
+   67  sudo getcap /usr/sbin/tcpdump > ~/getcap.out
+   68  sudo setenforce 1
+   69  sudo sed -i 's/^SELINUX=.*/SELINUX=enforcing' /etc/selinux/config 
+   70  sudo sed -i 's/^SELINUX=.*/SELINUX=enforcing/' /etc/selinux/config 
+   71  cat /etc/selinux/config 
+   72  semanage -version
+   73  sudo dnf install policycoreutils-python-utils
+   74  semanage -version
+   75  sudo semanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.*)?"
+   76  sudo restorecon -Rv /mephi-web
+   77  getenforce
+   78  getenforce > ~/getenforce.out
+   79  sudo usermos -s /sbin/nologin curator1
+   80  sudo usermod -s /sbin/nologin curator1
+   81  sudo usermod -s /sbin/nologin curator2
+   82  getent passwd curator1
+   83  sudo sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS   90/' /etc/login.defs
+   84  cat /etc/login.defs
+   85  sudo sed -i 's/^# minlen = .*/minlen = 12/' /etc/security/pwquality.conf
+   86  sudo sed -i 's/^minlen = .*/minlen = 12/' /etc/security/pwquality.conf
+   87* 
+   88  grep minlen /etc/security/pwquality.conf
+   89  echo "Hello from Student: 359123" | sudo tee /mephi-web/index.html
+   90  sudo restorcon -v /mephi-web/index.html 
+   91  sudo restorecon -v /mephi-web/index.html 
+   92  curl http://localhost/
+   93  echo "Hello from Student: 359123" | sudo tee /mephi-web/index.html
+   94  sudo restorecon -v /mephi-web/index.html 
+   95  curl http://localhost/
+   96  ls -Zd /mephi-web
+   97  ls -Zd /mephi-web/index.html
+   98  sudo nginx -T 2>dev>null | grep -nE '# configuration file|^\s*root |server_name|listen'
+   99  sudo nginx -T 2>&1 | grep -nE '# configuration file|^\s*root |server_name|listen'
+  100  sudo sed -i 's|/usr/share/nginx/html|/mephi-web|g'/etc/nginx/nginx.conf
+  101  sudo sed -i 's|/usr/share/nginx/html|/mephi-web|g' /etc/nginx/nginx.conf
+  102  sudo nginx -T 2>&1 | grep -nE '# configuration file|^\s*root |server_name|listen'
+  103  sudo nginx -t && sudo systemctl restart nginx
+  104  curl http://localhost/
+  105  history > ~/history.out
